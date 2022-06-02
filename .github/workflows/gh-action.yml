@@ -23,28 +23,28 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
-  sca:
-    runs-on: ubuntu-18.04
-    steps: 
-      - uses: actions/checkout@v2
-      - name: Setup Python 3.8
-        uses: actions/setup-python@v1
-        with: 
-          python-version: 3.8
-      - name: Install python deps
-        run: |
-          python -m pip install --upgrade pip
-          pip install pyraider==1.0.11 
-      - name: Get working directory
-        run: echo $(PWD)
-      - name: Scan packages
-        run: |
-          pyraider check -f ./app/requirements.txt -e json ./app/result.json
-      - name: "Upload Report"
-        uses: actions/upload-artifact@v1
-        with:
-          name: pyraider-scan-report
-          path: ./app/result.json
+#   sca:
+#     runs-on: ubuntu-18.04
+#     steps: 
+#       - uses: actions/checkout@v2
+#       - name: Setup Python 3.8
+#         uses: actions/setup-python@v1
+#         with: 
+#           python-version: 3.8
+#       - name: Install python deps
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install pyraider==1.0.11 
+#       - name: Get working directory
+#         run: echo $(PWD)
+#       - name: Scan packages
+#         run: |
+#           pyraider check -f ./app/requirements.txt -e json ./app/result.json
+#       - name: "Upload Report"
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: pyraider-scan-report
+#           path: ./app/result.json
   dast:
     if: always()
     needs: build
